@@ -1,0 +1,170 @@
+@font-face {
+  font-family: "CookieRunOTF-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "NEXON Lv1 Gothic OTF", sans-serif;
+}
+
+h1, h2, .slogan {
+  font-family: "CookieRunOTF-Bold";
+}
+
+footer {
+  font-family:'맑은 고딕', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
+main * {
+  margin: 0 auto;
+  text-align: center;
+}
+
+header {
+  margin-bottom: 60px;
+}
+
+footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: rgb(241, 241, 241);
+}
+
+nav {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  transition: font-size 0.3s, transform 0.4s;
+  user-select: none;
+}
+
+.home-icon:hover {
+  font-size: 45px;
+  transform-origin: center;
+  transform: rotate(720deg);
+}
+
+.header-title {
+  font-size: 80px;
+}
+
+.blue {
+  color: #2b68a4;
+}
+
+.slogan {
+  margin-bottom: 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.desc {
+  margin-bottom: 80px;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+.about-us-title {
+  margin-bottom: 60px;
+}
+
+.about-us-hr {
+  width: 50px;
+  margin-bottom: 15px;
+  border: 2px solid #2b68a4;
+}
+
+.about-us {
+  width: 40%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.about-us figcaption {
+  margin-top: 30px;
+}
+
+.footer-wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.float-wrapper::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.footer-links {
+  display: flex;
+  width: 30%;
+  flex-wrap: wrap;
+  float: left;
+}
+
+.footer-links div {
+  width: 50%;
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.footer-icons {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  float: right;
+  padding-top: 50px;
+}
+
+.footer-hr {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  border: 1px solid grey;
+}
+
+.footer-info {
+  display: flex;
+  float: left;
+}
+
+.footer-info * {
+  margin-right: 5px;
+}
+
+.float-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
+}
