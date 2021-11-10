@@ -1,0 +1,156 @@
+@font-face {
+  font-family: 'OTEnjoystoriesBA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/OTEnjoystoriesBA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2") format('woff2'),
+  url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff") format('woff'),
+  url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf") format('opentype');
+}
+
+/* reset */
+
+* {
+  font-family: 'GmarketSansMedium', sans-serif;
+}
+
+body {
+  background-color: #5b2386;
+}
+
+/* util */
+
+.blind {
+
+}
+
+.bold {
+  font-family: 'GmarketSansBold', sans-serif;
+  font-size: 20px;
+}
+
+.input-box {
+  width: 200px;
+  margin: 0 15px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.input-box::placeholder {
+  color: #BABCBE;
+}
+
+/* design */
+
+.main-header {
+  display: flex;
+  position: relative;
+  height: 265px;
+  margin: 50px 0;
+  justify-content: center;
+  align-items: center;
+  background: url('/img/clock.png') no-repeat 50% 50%;
+}
+
+.header-img {
+  width: auto;
+  height: 112px;
+}
+
+.desc-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.desc-title {
+  margin-bottom: 50px;
+  font-family: 'OTEnjoystoriesBA', cursive;
+  font-size: 36px;
+  color: #f5df4d;
+}
+
+.desc-quote {
+  display: inline-block;
+  width: 100%;
+  font-size: 17px;
+  line-height: 170%;
+  color: white;
+  background: url('/img/quotes.png') no-repeat 50% 30%;
+}
+
+.input-section {
+  margin-bottom: 80px;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+}
+
+.input-line {
+  margin-bottom: 20px;
+}
+
+.start-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 70px auto 0;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: #FCEE21;
+  font-size: 20px;
+  color: #5B2386;
+  cursor: pointer;
+}
+
+.start-btn::after {
+  content: '';
+  position: absolute;
+  width: 64px;
+  height: 72px;
+  top: 0;
+  right: -80px;
+  background: url('/img/click.png') no-repeat 0 0;
+  background-size: contain;
+}
+
+.main-footer {
+  
+  padding-bottom: 50px;
+  text-align: center;
+  color: white;
+}
+
+.license {
+  padding: 20px 0;
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-size: 10px;
+  line-height: 150%;
+}
