@@ -40,10 +40,6 @@ body {
 
 /* util */
 
-.blind {
-
-}
-
 .bold {
   font-family: 'GmarketSansBold', sans-serif;
   font-size: 20px;
@@ -71,7 +67,7 @@ body {
   margin: 50px 0;
   justify-content: center;
   align-items: center;
-  background: url('/img/clock.png') no-repeat 50% 50%;
+  background: url('../img/clock.png') no-repeat 50% 50%;
 }
 
 .header-img {
@@ -101,7 +97,7 @@ body {
   font-size: 17px;
   line-height: 170%;
   color: white;
-  background: url('/img/quotes.png') no-repeat 50% 30%;
+  background: url('../img/quotes.png') no-repeat 50% 30%;
 }
 
 .input-section {
@@ -137,7 +133,7 @@ body {
   height: 72px;
   top: 0;
   right: -80px;
-  background: url('/img/click.png') no-repeat 0 0;
+  background: url('../img/click.png') no-repeat 0 0;
   background-size: contain;
 }
 
