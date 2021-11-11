@@ -34,7 +34,14 @@
   font-family: 'GmarketSansMedium', sans-serif;
 }
 
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
 body {
+  font-size: 1.6rem;
   background-color: #5b2386;
 }
 
@@ -42,37 +49,52 @@ body {
 
 .bold {
   font-family: 'GmarketSansBold', sans-serif;
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 .input-box {
-  width: 200px;
-  margin: 0 15px;
-  padding: 15px 20px;
+  width: 20rem;
+  margin: 0 1.5rem;
+  padding: 1.5rem 2rem;
   border: none;
-  border-radius: 10px;
-  font-size: 20px;
+  border-radius: 1rem;
+  font-size: 2rem;
 }
 
 .input-box::placeholder {
   color: #BABCBE;
 }
 
+.responsive-flex1, .responsive-flex2, .responsive-flex3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.responsive-margin1, .responsive-margin2 {
+  margin-bottom: 2rem;
+}
+
 /* design */
 
 .main-header {
+  position: relative;
+  margin: 5rem 0;
+}
+
+.img-wrap {
   display: flex;
   position: relative;
-  height: 265px;
-  margin: 50px 0;
+  height: 26.5rem;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
   background: url('../img/clock.png') no-repeat 50% 50%;
+  background-size: auto 26.5rem;
 }
 
 .header-img {
-  width: auto;
-  height: 112px;
+  width: 100%;
 }
 
 .desc-section {
@@ -80,48 +102,58 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
   text-align: center;
 }
 
+.quote-wrap {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../img/quotes.png') no-repeat 50% 30%;
+}
+
 .desc-title {
-  margin-bottom: 50px;
+  display: block;
+  margin-bottom: 5rem;
   font-family: 'OTEnjoystoriesBA', cursive;
-  font-size: 36px;
+  font-size: 3.6rem;
   color: #f5df4d;
 }
 
 .desc-quote {
-  display: inline-block;
   width: 100%;
-  font-size: 17px;
+  font-size: 1.7rem;
   line-height: 170%;
   color: white;
-  background: url('../img/quotes.png') no-repeat 50% 30%;
 }
 
 .input-section {
-  margin-bottom: 80px;
-  font-size: 20px;
+  margin-bottom: 8rem;
+  font-size: 2rem;
   text-align: center;
   color: white;
 }
 
 .input-line {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .start-btn {
   position: relative;
   display: flex;
+  width: 30rem;
   justify-content: center;
   align-items: center;
-  margin: 70px auto 0;
-  padding: 10px 40px;
+  margin: 7rem auto 0;
+  padding: 1rem 4rem;
   border: none;
-  border-radius: 30px;
+  border-radius: 3rem;
   background-color: #FCEE21;
-  font-size: 20px;
+  font-size: 2rem;
+  word-break: keep-all;
   color: #5B2386;
   cursor: pointer;
 }
@@ -129,24 +161,113 @@ body {
 .start-btn::after {
   content: '';
   position: absolute;
-  width: 64px;
-  height: 72px;
+  width: 6.4rem;
+  height: 7.2rem;
   top: 0;
-  right: -80px;
+  right: -8rem;
   background: url('../img/click.png') no-repeat 0 0;
   background-size: contain;
 }
 
 .main-footer {
   
-  padding-bottom: 50px;
+  padding-bottom: 5rem;
   text-align: center;
   color: white;
 }
 
 .license {
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
   font-family: 'GmarketSansMedium', sans-serif;
-  font-size: 10px;
+  font-size: 1rem;
   line-height: 150%;
+}
+
+@media screen and (min-width: 768px) {
+  .img-wrap {
+    width: 56.4rem;
+  }
+
+  .responsive-margin1, .responsive-margin2 {
+    margin-bottom: 0;
+  }
+
+  .start-btn {
+    width: auto;
+  }
+}
+
+@media (min-width: 451px) and (max-width: 767px) {
+  html {
+    font-size: 56.25%;
+  }
+
+  .responsive-img {
+    width: 43rem;
+  }
+
+  .responsive-margin2 {
+    margin-bottom: 0;
+  }
+
+  .responsive-flex2 {
+    display: block;
+  }
+
+  .img-wrap {
+    height: 18rem;
+    background-size: auto 18rem;
+  }
+
+  .quote-wrap {
+    background-size: auto 3.2rem;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 450px) {
+  html {
+    font-size: 46.875%;
+  }
+
+  .responsive-img {
+    width: 26.7rem;
+  }
+
+  .responsive-flex1, .responsive-flex2, .responsive-flex3 {
+    display: block;
+  }
+
+  .img-wrap {
+    height: 12.5rem;
+    background-size: auto 12.5rem;
+  }
+
+  .quote-wrap {
+    background-size: auto 2.303rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  html {
+    font-size: 40.625%;
+  }
+
+  .responsive-img {
+    width: 26.7rem;
+  }
+
+  .responsive-flex1, .responsive-flex2, .responsive-flex3 {
+    display: block;
+  }
+
+  .img-wrap {
+    height: 12.5rem;
+    background-size: auto 12.5rem;
+  }
+
+  .quote-wrap {
+    background-size: auto 2.3rem;
+  }
 }
