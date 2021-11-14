@@ -1,0 +1,282 @@
+/* reset */
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  src: url('./fonts/SpoqaHanSansNeo-Medium.ttf');
+}
+
+html * {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* util */
+
+.blind {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* design */
+
+.main-section {
+  width: 500px;
+  height: 240px;
+  margin: 360px auto 0;
+  padding: 30px;
+  border: 1px solid #C4C4C4;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.main-logo {
+  margin-bottom: 28px;
+}
+
+.main-txt {
+  margin-bottom: 32px;
+}
+
+.main-btn {
+  width: 440px;
+  height: 60px;
+  background-color: #2F80ED;
+  border-radius: 5px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* login */
+
+.login-modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: #767676c4;
+}
+
+.is-active {
+  display: flex;
+}
+
+.login-box {
+  width: 520px;
+  height: 712px;
+  border: 1px solid #C4C4C4;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+
+.login-header {
+  position: relative;
+  border-bottom: 1px solid #C4C4C4;
+}
+
+.login-header-txt {
+  display: block;
+  margin: 20px auto 18px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.login-header-close {
+  display: block;
+  position: absolute;
+  right: 24px;
+  top: 0;
+}
+
+.content-wrap {
+  height: 100%;
+  padding: 26px 24px 25px;
+}
+
+.login-form-txt {
+  margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.input-box {
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 15px 16px;
+  border: 1px solid #C4C4C4;
+  background: #FFFFFF;
+  border-radius: 5px;
+}
+
+.input-box::placeholder {
+  font-weight: 300;
+  color: #767676;
+}
+
+
+.login-pw {
+  margin: 10px 0 4px;
+}
+
+.login-alert {
+  display: none;
+  padding-left: 4px;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #F4492E;
+}
+
+.is-visible {
+  display: block;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  margin: 12px 0 20px;
+  align-items: center;
+}
+
+.label-txt {
+  margin-left: 8px;
+  padding-top: 3px;
+  color: #767676;
+  user-select: none;
+}
+
+.checkbox-img {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('./images/checkbox.svg') no-repeat;
+}
+
+#maintain-checkbox:checked + .checkbox-label .checkbox-img {
+  background: url('./images/checkbox_checked.svg') no-repeat;
+}
+
+.login-btn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: #2F80ED;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.find-id-pw {
+  display: flex;
+  margin: 20px 0 30px;
+  justify-content: center;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #767676;
+}
+
+.stick {
+  margin: 0 12px;
+}
+
+.division-line {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  color: #767676;
+}
+
+.division-line::before {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-right: 13px;
+  flex-grow: 1;
+  background-color: #C4C4C4;
+}
+
+.division-line::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-left: 13px;
+  flex-grow: 1;
+  background-color: #C4C4C4;
+}
+
+.social-login {
+  display: flex;
+  height: 230px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.social-item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.login-google {
+  border: 1px solid #767676;
+}
+
+.login-facebook {
+  border: 1px solid #2D9CDB;
+}
+
+.login-naver {
+  border: 1px solid #00BF18;
+}
+
+.login-kakao {
+  border: 1px solid #F2C94C;
+}
+
+.social-img {
+  position: absolute;
+  top: 11px;
+  left: 12px;
+}
+
+.social-txt {
+  padding-top: 2px;
+  margin-left: 22px;
+  color: #767676;
+}
