@@ -173,23 +173,24 @@ input:focus {
   display: inline-flex;
   margin: 12px 0 20px;
   align-items: center;
-}
-
-.label-txt {
-  margin-left: 8px;
+  position: relative;
+  padding-left: 30px;
   padding-top: 3px;
   color: #767676;
   user-select: none;
 }
 
-.checkbox-img {
-  display: inline-block;
+.checkbox-label:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
   width: 22px;
   height: 22px;
   background: url('./images/checkbox.svg') no-repeat;
 }
 
-#maintain-checkbox:checked + .checkbox-label .checkbox-img {
+#maintain-checkbox:checked + .checkbox-label:before {
   background: url('./images/checkbox_checked.svg') no-repeat;
 }
 
@@ -214,8 +215,10 @@ input:focus {
   color: #767676;
 }
 
-.stick {
+.register:after {
+  content: '|';
   margin: 0 12px;
+  color: #767676;
 }
 
 .division-line {
