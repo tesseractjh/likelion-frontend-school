@@ -28,10 +28,10 @@
         <div class="content-wrap">
           <form action="/" method="get" class="login-form">
             <p class="login-form-txt">위니브에서 여러분의 궁금증을 해결하세요! :)</p>
-            <input type="text" placeholder="아이디" name="id" required class="input-box">
-            <p class="login-alert login-id-required">아이디를 입력해 주세요.</p>
-            <input type="password" placeholder="비밀번호" name="pw" required class="input-box">
-            <p class="login-alert login-pw-required">비밀번호를 입력해 주세요.</p>
+            <input type="text" id="login-id" placeholder="아이디" name="id" required class="input-box login-id">
+            <label for="login-id" class="login-alert login-id-required">아이디를 입력해 주세요.</label>
+            <input type="password" id="login-pw" placeholder="비밀번호" name="pw" required class="input-box login-pw">
+            <label for="login-pw" class="login-alert login-pw-required">비밀번호를 입력해 주세요.</label>
             <p class="login-alert login-failed">아이디 혹은 비밀번호가 일치하지 않습니다.</p>
             <input type="checkbox" id="maintain-checkbox" name="maintain" class="blind">
             <label for="maintain-checkbox" class="checkbox-label">로그인 상태 유지</label>
