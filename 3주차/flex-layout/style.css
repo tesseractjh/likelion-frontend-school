@@ -1,0 +1,119 @@
+html, body {
+  width: 100%;
+}
+
+.area {
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.doc-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.doc-header {
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  background-color: #7A4B5C;
+}
+
+.main-section {
+  position: relative;
+  width: calc(100% - 300px);
+  background-color: #C7C4A1;
+}
+
+.section-txt {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.article-wrapper {
+  margin-top: 100px;
+  padding: 0 20px;
+}
+
+.main-article {
+  margin: 20px 0;
+  height: 600px;
+  line-height: 600px;
+  align-self: flex-end;
+  background-color: #C78DA2;
+}
+
+.main-aside {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  align-self: flex-start;
+  flex-basis: 300px;
+  background-color: #79B8C7;
+  line-height: calc(100vh - 80px);
+}
+
+.doc-footer {
+  width: 100%;
+  height: 150px;
+  line-height: 150px;
+  background-color: #51727A;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .area {
+    font-size: 30px;
+  }
+
+  .main-section {
+    width: calc(100% - 200px);
+  }
+
+  .main-aside {
+    flex-basis: 200px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .area {
+    font-size: 25px;
+  }
+
+  .doc-container {
+    flex-direction: column;
+  }
+
+  .main-section {
+    width: auto;
+  }
+
+  .main-aside {
+    flex-basis: 150px;
+    line-height: 150px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .area {
+    font-size: 20px;
+  }
+
+  .doc-container {
+    flex-direction: column;
+  }
+
+  .main-section {
+    width: auto;
+  }
+
+  .main-aside {
+    flex-basis: 100px;
+    line-height: 100px;
+  }
+}
