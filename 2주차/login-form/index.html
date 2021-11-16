@@ -9,139 +9,142 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <main>
-      <section class="main-section">
-        <h1 class="blind">위니브 메인 화면</h1>
-        <img src="./images/logo.svg" alt="위니브 로고" class="main-logo">
-        <p class="main-txt">위니브를 더 즐겁고 편리하게 이용하세요.</p>
-        <button type="button" class="main-btn">로그인</button>
-      </section>
-      <section class="login-modal">
-        <h1 class="blind">로그인 화면</h1>
-        <article class="login-box">
-          <header class=login-header>
-            <strong class="login-header-txt">로그인 또는 회원가입</strong>
-            <button class="login-header-close">
-              <img src="./images/close.svg" alt="로그인 창 닫기">
-            </button>
-          </header>
-          <div class="content-wrap">
-            <form action="/" method="get" class="login-form">
-              <p class="login-form-txt">위니브에서 여러분의 궁금증을 해결하세요! :)</p>
-              <input type="text" placeholder="아이디" name="id" required class="input-box login-id">
-              <p class="login-alert login-id-required">아이디를 입력해 주세요.</p>
-              <input type="password" placeholder="비밀번호" name="pw" required class="input-box login-pw">
-              <p class="login-alert login-pw-required">비밀번호를 입력해 주세요.</p>
-              <p class="login-alert login-failed">아이디 혹은 비밀번호가 일치하지 않습니다.</p>
-              <input type="checkbox" id="maintain-checkbox" name="maintain" class="blind">
-              <label for="maintain-checkbox" class="checkbox-label">
-                <span class="checkbox-img"></span>
-                <span class="label-txt">로그인 상태 유지</span>
-              </label>
-              <button type="submit" class="login-btn">로그인</button>
-            </form>
-            <p class="find-id-pw">
-              <a href="#">회원가입</a>
-              <span class="stick">|</span>
-              <a href="#">아이디/비밀번호 찾기</a>
-            </p>
-            <p class="division-line">또는</p>
-            <ul class="social-login">
-              <li>
-                <button type="button" class="social-item login-google">
-                  <img src="./images/google.svg" alt="" class="social-img">
-                  <span class="social-txt">구글 계정으로 로그인</span>
-                </button>
-              </li>
-              <li>
-                <button type="button" class="social-item login-facebook">
-                  <img src="./images/facebook.svg" alt="" class="social-img">
-                  <span class="social-txt">페이스북 계정으로 로그인</span>
-                </button>
-              </li>
-              <li>
-                <button type="button" class="social-item login-naver">
-                  <img src="./images/naver.svg" alt="" class="social-img">
-                  <span class="social-txt">네이버 계정으로 로그인</span>
-                </button>
-              </li>
-              <li>
-                <button type="button" class="social-item login-kakao">
-                  <img src="./images/kakao.svg" alt="" class="social-img">
-                  <span class="social-txt">카카오톡 계정으로 로그인</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </article>
-      </section>
-    </main>
-    <script>
-      const getElem = query => document.querySelector(`.${query}`);
-      
-      const mainButton = getElem('main-btn');
-      const closeButton = getElem('login-header-close');
-      const loginButton = getElem('login-btn');
-      const modal = getElem('login-modal');
-      const idInput = getElem('login-id');
-      const pwInput = getElem('login-pw');
-      const idAlert = getElem('login-id-required');
-      const pwAlert = getElem('login-pw-required');
-      const failAlert = getElem('login-failed');
-      const inputArr = [pwInput, idInput];
-      const alertArr = [idAlert, pwAlert, failAlert];
+  <main>
+    <section class="main-section">
+      <h1 class="blind">위니브 메인 화면</h1>
+      <img src="./images/logo.svg" alt="위니브 로고" class="main-logo">
+      <p class="main-txt">위니브를 더 즐겁고 편리하게 이용하세요.</p>
+      <button type="button" class="main-btn">로그인</button>
+    </section>
+    <section class="login-modal">
+      <h1 class="blind">로그인 화면</h1>
+      <article class="login-box">
+        <header class=login-header>
+          <strong class="login-header-txt">로그인 또는 회원가입</strong>
+          <button class="login-header-close">
+            <img src="./images/close.svg" alt="로그인 창 닫기">
+          </button>
+        </header>
+        <div class="content-wrap">
+          <form action="/" method="get" class="login-form">
+            <p class="login-form-txt">위니브에서 여러분의 궁금증을 해결하세요! :)</p>
+            <input type="text" placeholder="아이디" name="id" required class="input-box login-id">
+            <p class="login-alert login-id-required">아이디를 입력해 주세요.</p>
+            <input type="password" placeholder="비밀번호" name="pw" required class="input-box login-pw">
+            <p class="login-alert login-pw-required">비밀번호를 입력해 주세요.</p>
+            <p class="login-alert login-failed">아이디 혹은 비밀번호가 일치하지 않습니다.</p>
+            <input type="checkbox" id="maintain-checkbox" name="maintain" class="blind">
+            <label for="maintain-checkbox" class="checkbox-label">
+              <span class="checkbox-img"></span>
+              <span class="label-txt">로그인 상태 유지</span>
+            </label>
+            <button type="submit" class="login-btn">로그인</button>
+          </form>
+          <p class="find-id-pw">
+            <a href="#">회원가입</a>
+            <span class="stick">|</span>
+            <a href="#">아이디/비밀번호 찾기</a>
+          </p>
+          <p class="division-line">또는</p>
+          <ul class="social-login">
+            <li>
+              <button type="button" class="social-item login-google">
+                <img src="./images/google.svg" alt="" class="social-img">
+                <span class="social-txt">구글 계정으로 로그인</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="social-item login-facebook">
+                <img src="./images/facebook.svg" alt="" class="social-img">
+                <span class="social-txt">페이스북 계정으로 로그인</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="social-item login-naver">
+                <img src="./images/naver.svg" alt="" class="social-img">
+                <span class="social-txt">네이버 계정으로 로그인</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="social-item login-kakao">
+                <img src="./images/kakao.svg" alt="" class="social-img">
+                <span class="social-txt">카카오톡 계정으로 로그인</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script>
+    const mainButton = document.querySelector('.main-btn');
+    const closeButton = document.querySelector('.login-header-close');
+    const loginButton = document.querySelector('.login-btn');
+    const modal = document.querySelector('.login-modal');
+    const idInput = document.querySelector('.login-id');
+    const pwInput = document.querySelector('.login-pw');
+    const idAlert = document.querySelector('.login-id-required');
+    const pwAlert = document.querySelector('.login-pw-required');
+    const failAlert = document.querySelector('.login-failed');
+    const inputArr = [pwInput, idInput];
+    const alertArr = [idAlert, pwAlert, failAlert];
 
-      const showModal = () => modal.classList.add('is-active');
-      const hideModal = () => modal.classList.remove('is-active');
-      const clearModal = () => {
-        inputArr.forEach(input => {
-          input.value = ''
-          input.classList.remove('is-focused');
-        });
-        alertArr.forEach(alert => alert.classList.remove('is-visible'));
-      };
-      const showAlert = (...args) => {
-        alertArr.forEach((alert, i) => {
-          if (args[i]) {
-            alert.classList.add('is-visible');
-          } else {
-            alert.classList.remove('is-visible');
-          }
-        });
-      };
-      const focusBox = (...args) => {
-        inputArr.forEach((input, i) => {
-          if (args[i]) {
-            input.classList.add('is-focused');
-            input.focus();
-          } else {
-            input.classList.remove('is-focused');
-          }
-        });
-      };
-      const clickLogin = e => {
-        e.preventDefault();
-        if (idInput.value === '' && pwInput.value === '') {
-          showAlert(true, true, false);
-          focusBox(true, true);
-        } else if (idInput.value === '') {
-          showAlert(true, false, false);
-          focusBox(false, true);
-        } else if (pwInput.value === '') {
-          showAlert(false, true, false);
-          focusBox(true, false);
-        } else {
-          showAlert(false, false, true);
-          focusBox(false, false);
-        }
-      };
+    const showModal = () => modal.classList.add('is-active');
 
-      mainButton.addEventListener('click', () => {
-        clearModal();
-        showModal();
+    const hideModal = () => modal.classList.remove('is-active');
+
+    const clearModal = () => {
+      inputArr.forEach(input => {
+        input.value = ''
+        input.classList.remove('is-focused');
       });
-      closeButton.addEventListener('click', hideModal);
-      loginButton.addEventListener('click', clickLogin);
-    </script>
+      alertArr.forEach(alert => alert.classList.remove('is-visible'));
+    };
+
+    const showAlert = (...args) => {
+      alertArr.forEach((alert, i) => {
+        if (args[i]) {
+          alert.classList.add('is-visible');
+        } else {
+          alert.classList.remove('is-visible');
+        }
+      });
+    };
+
+    const focusBox = (...args) => {
+      inputArr.forEach((input, i) => {
+        if (args[i]) {
+          input.classList.add('is-focused');
+          input.focus();
+        } else {
+          input.classList.remove('is-focused');
+        }
+      });
+    };
+    
+    const clickLogin = e => {
+      e.preventDefault();
+      if (idInput.value === '' && pwInput.value === '') {
+        showAlert(true, true, false);
+        focusBox(true, true);
+      } else if (idInput.value === '') {
+        showAlert(true, false, false);
+        focusBox(false, true);
+      } else if (pwInput.value === '') {
+        showAlert(false, true, false);
+        focusBox(true, false);
+      } else {
+        showAlert(false, false, true);
+        focusBox(false, false);
+      }
+    };
+
+    mainButton.addEventListener('click', () => {
+      clearModal();
+      showModal();
+    });
+    closeButton.addEventListener('click', hideModal);
+    loginButton.addEventListener('click', clickLogin);
+  </script>
 </body>
 </html>
