@@ -27,6 +27,10 @@ button {
   cursor: pointer;
 }
 
+input:focus {
+  outline: none;
+}
+
 /* util */
 
 .blind {
@@ -93,7 +97,6 @@ button {
 
 .login-box {
   width: 520px;
-  height: 712px;
   border: 1px solid #C4C4C4;
   border-radius: 10px;
   background-color: #FFFFFF;
@@ -160,6 +163,10 @@ button {
 
 .is-visible {
   display: block;
+}
+
+.is-focused {
+  border: 2px solid #F4492E;
 }
 
 .checkbox-label {

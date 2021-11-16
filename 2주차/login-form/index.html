@@ -82,36 +82,66 @@
       const mainButton = getElem('main-btn');
       const closeButton = getElem('login-header-close');
       const loginButton = getElem('login-btn');
-      
       const modal = getElem('login-modal');
       const idInput = getElem('login-id');
       const pwInput = getElem('login-pw');
       const idAlert = getElem('login-id-required');
       const pwAlert = getElem('login-pw-required');
       const failAlert = getElem('login-failed');
+      const inputArr = [pwInput, idInput];
+      const alertArr = [idAlert, pwAlert, failAlert];
 
-      mainButton.addEventListener('click', () => modal.classList.add('is-active'));
-      closeButton.addEventListener('click', () => modal.classList.remove('is-active'));
-      loginButton.addEventListener('click', e => {
+      const showModal = () => modal.classList.add('is-active');
+      const hideModal = () => modal.classList.remove('is-active');
+      const clearModal = () => {
+        inputArr.forEach(input => {
+          input.value = ''
+          input.classList.remove('is-focused');
+        });
+        alertArr.forEach(alert => alert.classList.remove('is-visible'));
+      };
+      const showAlert = (...args) => {
+        alertArr.forEach((alert, i) => {
+          if (args[i]) {
+            alert.classList.add('is-visible');
+          } else {
+            alert.classList.remove('is-visible');
+          }
+        });
+      };
+      const focusBox = (...args) => {
+        inputArr.forEach((input, i) => {
+          if (args[i]) {
+            input.classList.add('is-focused');
+            input.focus();
+          } else {
+            input.classList.remove('is-focused');
+          }
+        });
+      };
+      const clickLogin = e => {
         e.preventDefault();
-        if (idInput.value === '' && pwInput.value === '') { // 테두리 빨간색으로 변하게 해야 함
-          idAlert.classList.add('is-visible');
-          pwAlert.classList.add('is-visible');
-          failAlert.classList.remove('is-visible');
+        if (idInput.value === '' && pwInput.value === '') {
+          showAlert(true, true, false);
+          focusBox(true, true);
         } else if (idInput.value === '') {
-          idAlert.classList.add('is-visible');
-          pwAlert.classList.remove('is-visible');
-          failAlert.classList.remove('is-visible');
+          showAlert(true, false, false);
+          focusBox(false, true);
         } else if (pwInput.value === '') {
-          idAlert.classList.remove('is-visible');
-          pwAlert.classList.add('is-visible');
-          failAlert.classList.remove('is-visible');
+          showAlert(false, true, false);
+          focusBox(true, false);
         } else {
-          idAlert.classList.remove('is-visible');
-          pwAlert.classList.remove('is-visible');
-          failAlert.classList.add('is-visible');
+          showAlert(false, false, true);
+          focusBox(false, false);
         }
+      };
+
+      mainButton.addEventListener('click', () => {
+        clearModal();
+        showModal();
       });
+      closeButton.addEventListener('click', hideModal);
+      loginButton.addEventListener('click', clickLogin);
     </script>
 </body>
 </html>
