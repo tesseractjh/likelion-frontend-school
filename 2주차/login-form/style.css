@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
-  src: url('./fonts/SpoqaHanSansNeo-Medium.ttf');
+  src: url('/2주차/login-form/fonts/SpoqaHanSansNeo-Medium.ttf');
 }
 
 html * {
@@ -186,11 +186,11 @@ input:focus {
   display: inline-block;
   width: 22px;
   height: 22px;
-  background: url('./images/checkbox.svg') no-repeat;
+  background: url('/2주차/login-form/images/checkbox.svg') no-repeat;
 }
 
 #maintain-checkbox:checked + .checkbox-label .checkbox-img {
-  background: url('./images/checkbox_checked.svg') no-repeat;
+  background: url('/2주차/login-form/images/checkbox_checked.svg') no-repeat;
 }
 
 .login-btn {
