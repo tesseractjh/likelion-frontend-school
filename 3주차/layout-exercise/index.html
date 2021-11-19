@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>레이아웃 연습</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main>
+    <section class="card">
+      <h1 class="sr-only">영화 정보</h1>
+      <div class="poster">
+        <img src="./images/book.svg" alt="파이썬 부트캠프 포스터" class="poster-img">
+      </div>
+      <div class="info">
+        <p class="info-top">
+          <em class="movie-name">파이썬 부트캠프</em>
+          <strong class="genre">드라마</strong>
+          <strong class="rating">전체이용가</strong>
+        </p>
+        <div class="info-bottom">
+          <ul class="btn-list">
+            <li>
+              <button type="button" class="circle-btn thumbs-up">
+                <strong class="sr-only">추천 버튼</strong>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="circle-btn heart">
+                <strong class="sr-only">좋아요 버튼</strong>
+              </button>
+            </li>
+          </ul>
+          <strong class="average">별점 평균 4.5</strong>
+          <button type="button" class="start-rating-btn">
+            별점 등록하기
+          </button>
+          <ul class="star-list is-visible">
+            <li>
+              <button type="button" class="star-btn full">
+                <span class="sr-only">별점 1점</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="star-btn full">
+                <span class="sr-only">별점 2점</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="star-btn full">
+                <span class="sr-only">별점 3점</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="star-btn half">
+                <span class="sr-only">별점 4점</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="star-btn empty">
+                <span class="sr-only">별점 5점</span>
+              </button>
+            </li>
+          </ul>
+          <button type="button" class="cancel-rating-btn is-visible">
+            <span class="sr-only">별점 등록 취소</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>
