@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vending machine</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main>
+    <h1 class="sr-only">cola cola</h1>
+    <header class="header-main">
+      <img src="images/logo.svg" alt="콜라콜라 로고" class="img-logo">
+    </header>
+    
+    <section class="box machine">
+      <h2 class="sr-only">자판기 화면</h2>
+      <ul class="list-item">
+        <li class="box-shadow item">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/original_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Original_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+        <li class="box-shadow item is-soldout">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/violet_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Violet_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+        <li class="box-shadow item">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/yellow_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Yellow_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+        <li class="box-shadow item">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/cool_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Cool_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+        <li class="box-shadow item">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/green_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Green_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+        <li class="box-shadow item">
+          <button
+            type="button"
+            class="btn-item"
+            data-item="" data-count="" data-price="" data-image=""
+          >
+            <img src="images/orange_cola.svg" alt="" class="img-item">
+            <strong class="txt-item">Orange_Cola</strong>
+            <span class="value-item">1000</span>
+          </button>
+        </li>
+      </ul>
+      <div class="func-machine">
+        <div class="func">
+          <p class="box-inner func-left wrap-balance">
+            <strong class="txt-inner txt-balance">잔액</strong>
+            <strong class="value-inner value-balance">1,000</strong>
+          </p>
+          <button type="button" class=" box-shadow func-right btn-rect btn-change">거스름돈 반환</button>
+        </div>
+        <form action="/" method="get" class="func">
+          <input type="text" placeholder="입금액 입력" class="func-left value-pay">
+          <button type="button" class=" box-shadow func-right btn-rect btn-pay">입금</button>
+        </form>
+        <div class="func">
+          <ul class="box-scroll func-left list-selected">
+            <li class="box item-scroll">
+              <img src="./images/original_cola.svg" alt="" class="img-scroll">
+              <strong class="txt-scroll">Original_Cola</strong>
+              <div class="wrap-value">
+                <span class="value-scroll">1</span>
+              </div>
+            </li>
+            <li class="box item-scroll">
+              <img src="./images/green_cola.svg" alt="" class="img-scroll">
+              <strong class="txt-scroll">Green_Cola</strong>
+              <div class="wrap-value">
+                <span class="value-scroll">1</span>
+              </div>
+            </li>
+          </ul>
+          <button type="button" class="box-shadow func-right btn-rect btn-acquire">획득</button>
+        </div>
+      </div>
+    </section>
+    <div class="right">
+      <section class="box money">
+        <h2 class="sr-only">현재 나의 소지금</h2>
+        <p class="box-inner wrap-money">
+          <strong class="txt-inner txt-money">소지금</strong>
+          <strong class="value-inner value-money">25,000</strong>
+        </p>
+      </section>
+      <section class="box acquired">
+        <h2 class="title-acquired">획득한 음료</h2>
+        <ul class="box-scroll list-acquired">
+          <li class="box item-scroll">
+            <img src="./images/original_cola.svg" alt="" class="img-scroll">
+            <strong class="txt-scroll">Original_Cola</strong>
+            <div class="wrap-value">
+              <span class="value-scroll">1</span>
+            </div>
+          </li>
+          <li class="box item-scroll">
+            <img src="./images/green_cola.svg" alt="" class="img-scroll">
+            <strong class="txt-scroll">Green_Cola</strong>
+            <div class="wrap-value">
+              <span class="value-scroll">2</span>
+            </div>
+          </li>
+          <li class="box item-scroll">
+            <img src="./images/orange_cola.svg" alt="" class="img-scroll">
+            <strong class="txt-scroll">Orange_Cola</strong>
+            <div class="wrap-value">
+              <span class="value-scroll">1</span>
+            </div>
+          </li>
+          <li class="box item-scroll">
+            <img src="./images/violet_cola.svg" alt="" class="img-scroll">
+            <strong class="txt-scroll">Violet_Cola</strong>
+            <div class="wrap-value">
+              <span class="value-scroll">5</span>
+            </div>
+          </li>
+        </ul>
+        <p class="total">
+          <strong class="txt-inner txt-acquirered">총금액</strong>
+          <strong class="value-inner value-acquired">9,000</strong>
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
