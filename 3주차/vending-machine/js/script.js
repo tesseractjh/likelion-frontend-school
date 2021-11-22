@@ -44,13 +44,8 @@ const VIEW = {
   viewBalance: 1000,
   viewPay: 0,
   viewMoney: 25000,
-  selected: {
-    original: new Beverage('original', 1),
-    green: new Beverage('green', 1),
-  },
-  display: [
-    'original', 'green'
-  ],
+  selected: {},
+  display: [],
   get balance() {
     return this.viewBalance;
   },
@@ -105,35 +100,6 @@ const createAndSetElement = (tagName, setting = {}) => {
   const element = document.createElement(tagName);
   setElement(element, setting);
   return element;
-};
-
-// 자판기에 진열될 음료수에 대해 li 엘리먼트를 생성하여 반환
-const setItem = (beverage, index) => {
-  const { name, price, stockCount } = beverage;
-  const prefix = `.list-item li:nth-child(${index}) `;
-  const button = document.querySelector(prefix + '.btn-item');
-  const img = document.querySelector(prefix + '.img-item');
-  const strong = document.querySelector(prefix + '.txt-item');
-  const span = document.querySelector(prefix + '.value-item');
-
-  setElement(button, {
-    type: 'button',
-    className: 'btn-item',
-    dataset: { name, price, stockCount }
-  });
-  setElement(img, {
-    src: `images/${name}_cola.svg`,
-    alt: '',
-    className: 'img-item'
-  });
-  setElement(strong, {
-    className: 'txt-item',
-    text: `${name[0].toUpperCase()}${name.slice(1)}_Cola`
-  });
-  setElement(span, {
-    className: 'value-item',
-    text: price
-  });
 };
 
 // 현재 자판기에서 선택된 음료수에 대해 li 엘리먼트를 생성하여 반환
@@ -196,12 +162,47 @@ const getAcquired = beverage => {
   return li;
 };
 
+// 자판기에 진열될 음료수의 li 엘리먼트 자손 태그들의 프로퍼티 설정
+const setItem = (beverage, index) => {
+  const { name, price, count } = beverage;
+  const prefix = `.list-item li:nth-child(${index}) `;
+  const button = document.querySelector(prefix + '.btn-item');
+  const img = document.querySelector(prefix + '.img-item');
+  const strong = document.querySelector(prefix + '.txt-item');
+  const span = document.querySelector(prefix + '.value-item');
+
+  setElement(button, {
+    type: 'button',
+    className: 'btn-item',
+    dataset: { name, price, count }
+  });
+  setElement(img, {
+    src: `images/${name}_cola.svg`,
+    alt: '',
+    className: 'img-item'
+  });
+  setElement(strong, {
+    className: 'txt-item',
+    text: `${name[0].toUpperCase()}${name.slice(1)}_Cola`
+  });
+  setElement(span, {
+    className: 'value-item',
+    text: price
+  });
+};
+
 // 자판기에 음료수 진열
 const setDisplay = () => {
   const { beverage, display } = machineDatabase;
   display.forEach((bev, index) => {
-    const li = setItem(beverage[bev], index + 1);
+    setItem(beverage[bev], index + 1);
   });
+};
+
+const resetElement = element => {
+  while (element.firstElementChild) {
+    element.removeChild(element.lastElementChild);
+  }
 };
 
 // 선택된 음료수 표시
@@ -209,6 +210,7 @@ const setSelected = () => {
   const { beverage } = machineDatabase;
   const { display } = VIEW;
   const fragment = document.createDocumentFragment();
+  resetElement(lists.selected);
   display.forEach(bev => {
     const li = getSelected(beverage[bev]);
     fragment.appendChild(li);
@@ -228,6 +230,28 @@ const setAcquired = () => {
   lists.acquired.appendChild(fragment);
 };
 
+// 모든 버튼에 이벤트 리스너 등록
+const setButtons = () => {
+  Object.entries(buttons).forEach(([ key, button ]) => {
+    button.addEventListener('click', eventHandlers[key]);
+  });
+  document.querySelectorAll('.btn-item').forEach(button => {
+    button.addEventListener('click', eventHandlers.select);
+  });
+};
+
+// 선택된 음료수 정보를 갱신
+const updateSelected = (name, price) => {
+  if (!VIEW.display.includes(name)) {
+    VIEW.display.push(name);
+    VIEW.selected[name] = new Beverage(name, 0, price);
+  }
+  VIEW.selected[name].count++;
+  VIEW.balance -= price;
+  setSelected();
+};
+
+// pay 버튼을 눌렀을 때 입력된 입금액의 유효성 검사
 const isPayValid = value => {
   if (!value || !Number.isInteger(value) || value < 0) {
     return false;
@@ -241,35 +265,23 @@ const isChangeValid = () => {
 
 };
 
-const select = ({ currentTarget }) => {
-  const { name } = currentTarget.dataset;
-  const beverage = machineDatabase.beverage[name];
-
-  if (beverage.stockCount > 0) {
-    beverage.stockCount--;
-    beverage.selectedCount++;
-    setSelected();
-  }
-
-  if (!beverage.stockCount || beverage.stockCount < 0) {
-    currentTarget.classList.add('is-soldout');
-  } else {
-    currentTarget.classList.remove('is-soldout');
-  }
-};
-
-const setButtons = () => {
-  Object.entries(buttons).forEach(([ key, button ]) => {
-    button.addEventListener('click', eventHandlers[key]);
-  });
-};
-
 const eventHandlers = {
+  // 돈 차감되게 만들기
+  select({ currentTarget }) {
+    const { name, price, count } = currentTarget.dataset;
+    if (+count > 0 && VIEW.balance >= price) {
+      currentTarget.dataset.count--;
+      updateSelected(name, price);
+    }
+    if (currentTarget.dataset.count === '0') {
+      currentTarget.parentNode.classList.add('is-soldout');
+    }
+  },
+
   pay() {
     const { value } = values.pay;
     if (value === '') {
       alert(VIEW.ALERT_TXT01);
-      values.pay.focus();
     } else if (value > VIEW.money) {
       alert(VIEW.ALERT_TXT02);
     } else if (isPayValid(Number(value))) {
@@ -277,9 +289,9 @@ const eventHandlers = {
       VIEW.balance = VIEW.balance + Number(value);
     } else {
       alert(VIEW.ALERT_TXT00);
-      values.pay.value = '';
-      values.pay.focus();
     }
+    values.pay.value = '';
+    values.pay.focus();
   },
 
   change() {
