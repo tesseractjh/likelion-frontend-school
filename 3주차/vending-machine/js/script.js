@@ -8,7 +8,6 @@ const Beverage = function(name, count = 5, price = 1000) {
 // 자판기 정보
 const machineDatabase = {
   balance: 1000,
-  insertedMoney: 0,
   beverage: {
     original: new Beverage('original'),
     violet: new Beverage('violet'),
@@ -41,10 +40,10 @@ const VIEW = {
   ALERT_TXT00: '오류가 발생했습니다.',
   ALERT_TXT01: '입금액을 입력하세요.',
   ALERT_TXT02: '소지금이 부족합니다.',
-  viewBalance: 1000,
+  viewBalance: 0,
   viewPay: 0,
-  viewMoney: 25000,
-  viewTotal: 9000,
+  viewMoney: 0,
+  viewTotal: 0,
   selected: {},
   display: [],
 
@@ -81,7 +80,7 @@ const VIEW = {
 
   set total(value) {
     this.viewTotal = value;
-    values.total.textContent = this.viewTotal;
+    values.acquired.textContent = this.viewTotal;
   },
 
   get costSum() {
@@ -97,10 +96,10 @@ const getElementsByKeyword = (type, ...keys) => {
   const elements = {};
   keys.forEach(key => elements[key] = document.querySelector(`.${type}-${key}`));
   return elements;
-}
+};
 const lists = getElementsByKeyword('list', 'item', 'selected', 'acquired');
 const buttons = getElementsByKeyword('btn', 'change', 'pay', 'acquire');
-const values = getElementsByKeyword('value', 'balance', 'pay', 'money', 'total');
+const values = getElementsByKeyword('value', 'balance', 'pay', 'money', 'acquired');
 
 // DOM 엘리먼트의 프로퍼티를 setting대로 설정
 const setElement = (element, setting = {}) => {
@@ -263,6 +262,14 @@ const setButtons = () => {
   });
 };
 
+const setValues = () => {
+  const { money } = customerDatabase;
+  VIEW.pay = 0;
+  VIEW.balance = 0;
+  VIEW.total = 0;
+  VIEW.money = money;
+}
+
 // 선택된 음료수 정보를 갱신
 const updateSelected = (name, price) => {
   if (!VIEW.display.includes(name)) {
@@ -295,7 +302,7 @@ const isChangeValid = value => {
 };
 
 const eventHandlers = {
-  // 돈 차감되게 만들기
+
   select({ currentTarget }) {
     const { name, price, count } = currentTarget.dataset;
     if (+count > 0 && VIEW.balance >= price) {
@@ -344,6 +351,7 @@ const main = () => {
   setSelected();
   //setAcquired();
   setButtons();
+  setValues();
 };
 
 main();
