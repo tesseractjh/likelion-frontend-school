@@ -50,30 +50,44 @@ const VIEW = {
   get balance() {
     return this.viewBalance;
   },
+
   set balance(value) {
     this.viewBalance = value;
     values.balance.textContent = this.viewBalance;
   },
+
   get pay() {
     return this.viewBalance;
   },
+
   set pay(value) {
     this.viewPay = value;
     values.pay.textContent = this.viewPay;
   },
+
   get money() {
     return this.viewMoney;
   },
+
   set money(value) {
     this.viewMoney = value;
     values.money.textContent = this.viewMoney;
   },
+
   get total() {
     return this.viewTotal;
   },
+
   set total(value) {
     this.viewTotal = value;
     values.total.textContent = this.viewTotal;
+  },
+
+  get costSum() {
+    return this.display.reduce((sum, bev) => {
+      const { price, count } = this.selected[bev];
+      return sum + price * count;
+    }, 0);
   }
 };
 
@@ -269,8 +283,14 @@ const isPayValid = value => {
   return true;
 };
 
-const isChangeValid = () => {
-
+const isChangeValid = value => {
+  if (!value || !Number.isInteger(value) || value < 0) {
+    return false;
+  } else if (VIEW.costSum + VIEW.balance !== VIEW.pay) {
+    console.log(VIEW.costSum, VIEW.balance, VIEW.pay)
+    return false;
+  }
+  return true;
 };
 
 const eventHandlers = {
@@ -293,8 +313,9 @@ const eventHandlers = {
     } else if (value > VIEW.money) {
       alert(VIEW.ALERT_TXT02);
     } else if (isPayValid(Number(value))) {
-      VIEW.money = VIEW.money - Number(value);
-      VIEW.balance = VIEW.balance + Number(value);
+      VIEW.money -= Number(value);
+      VIEW.balance += Number(value);
+      VIEW.pay += Number(value);
     } else {
       alert(VIEW.ALERT_TXT00);
     }
@@ -303,7 +324,13 @@ const eventHandlers = {
   },
 
   change() {
-  
+    const { balance } = VIEW;
+    if (isChangeValid(balance)) {
+      VIEW.money += balance;
+      VIEW.balance = 0;
+    } else {
+      alert(VIEW.ALERT_TXT00);
+    }
   },
 
   acquire() {
