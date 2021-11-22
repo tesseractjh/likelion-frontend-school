@@ -40,8 +40,8 @@ const VIEW = {
   ALERT_TXT00: '오류가 발생했습니다.',
   ALERT_TXT01: '입금액을 입력하세요.',
   ALERT_TXT02: '소지금이 부족합니다.',
+  pay: 0,
   viewBalance: 0,
-  viewPay: 0,
   viewMoney: 0,
   viewTotal: 0,
   selected: {},
@@ -54,15 +54,6 @@ const VIEW = {
   set balance(value) {
     this.viewBalance = value;
     values.balance.textContent = this.viewBalance;
-  },
-
-  get pay() {
-    return this.viewBalance;
-  },
-
-  set pay(value) {
-    this.viewPay = value;
-    values.pay.textContent = this.viewPay;
   },
 
   get money() {
@@ -243,11 +234,13 @@ const setSelected = () => {
 // 획득한 음료수 표시
 const setAcquired = () => {
   const { beverage } = machineDatabase;
-  const { display } = customerDatabase;
+  const { acquired, display } = customerDatabase;
   const fragment = document.createDocumentFragment();
   display.forEach(bev => {
-    const li = getAcquired(beverage[bev]);
-    fragment.appendChild(li);
+    if (acquired[bev].count > 0) {
+      const li = getAcquired(beverage[bev]);
+      fragment.appendChild(li);
+    }
   });
   lists.acquired.appendChild(fragment);
 };
@@ -281,6 +274,13 @@ const updateSelected = (name, price) => {
   setSelected();
 };
 
+const isCountCorrect = () => {
+  const { beverage } = machineDatabase;
+  Object.keys(VIEW.selected).every(bev => {
+    return VIEW.selected[bev].count <= beverage[bev].count;
+  });
+};
+
 // pay 버튼을 눌렀을 때 입력된 입금액의 유효성 검사
 const isPayValid = value => {
   if (!value || !Number.isInteger(value) || value < 0) {
@@ -295,7 +295,16 @@ const isChangeValid = value => {
   if (!value || !Number.isInteger(value) || value < 0) {
     return false;
   } else if (VIEW.costSum + VIEW.balance !== VIEW.pay) {
-    console.log(VIEW.costSum, VIEW.balance, VIEW.pay)
+    return false;
+  }
+  return true;
+};
+
+const isAcquireValid = value => {
+  const { money } = customerDatabase;
+  if (VIEW.pay + VIEW.money !== money) {
+    return false;
+  } else if (!isCountCorrect()) {
     return false;
   }
   return true;
@@ -316,15 +325,15 @@ const eventHandlers = {
 
   pay() {
     const { value } = values.pay;
-    if (value === '') {
-      alert(VIEW.ALERT_TXT01);
-    } else if (value > VIEW.money) {
-      alert(VIEW.ALERT_TXT02);
-    } else if (isPayValid(Number(value))) {
+    if (isPayValid(Number(value))) {
       VIEW.money -= Number(value);
       VIEW.balance += Number(value);
       VIEW.pay += Number(value);
-    } else {
+    } else if (value === '') {
+      alert(VIEW.ALERT_TXT01);
+    } else if (value > VIEW.money) {
+      alert(VIEW.ALERT_TXT02);
+    } else  {
       alert(VIEW.ALERT_TXT00);
     }
     values.pay.value = '';
@@ -336,13 +345,28 @@ const eventHandlers = {
     if (isChangeValid(balance)) {
       VIEW.money += balance;
       VIEW.balance = 0;
-    } else {
+      VIEW.pay -= balance;
+    } else if (balance !== 0) {
       alert(VIEW.ALERT_TXT00);
     }
   },
 
   acquire() {
-
+    if (isAcquireValid()) {
+      const { beverage } = machineDatabase;
+      const { acquired } = customerDatabase;
+      // 여기다가 자판기 음료의 재고수를 차감하고,
+      VIEW.selected.forEach(bev => {
+        const { count } = VIEW.selected[bev];
+        beverage[bev].count -= count;
+        acquired[bev].count += count;
+      });
+      setAcquired();
+      VIEW.selected = {};
+      VIEW.display = [];
+      setSelected();
+      
+    }
   }
 };
 
