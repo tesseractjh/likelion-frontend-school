@@ -47,6 +47,7 @@ const VIEW = {
   viewTotal: 9000,
   selected: {},
   display: [],
+
   get balance() {
     return this.viewBalance;
   },
@@ -338,7 +339,11 @@ const eventHandlers = {
   }
 };
 
-setDisplay();
-setSelected();
-//setAcquired();
-setButtons();
+const main = () => {
+  setDisplay();
+  setSelected();
+  //setAcquired();
+  setButtons();
+};
+
+main();
