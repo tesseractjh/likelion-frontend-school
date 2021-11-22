@@ -24,15 +24,8 @@ const machineDatabase = {
 // 고객 정보
 const customerDatabase = {
   money: 25000,
-  acquired: {
-    original: new Beverage('original', 1),
-    violet: new Beverage('violet', 5),
-    green: new Beverage('green', 2),
-    orange: new Beverage('orange', 1)
-  },
-  display: [
-    'original', 'green', 'orange', 'violet'
-  ]
+  acquired: {},
+  display: []
 };
 
 // 클라이언트 변수
@@ -148,7 +141,7 @@ const getSelected = beverage => {
 // 획득한 음료수에 대해 li 엘리먼트를 생성하여 반환
 const getAcquired = beverage => {
   const { name } = beverage;
-  const { acquired } = customerDatabase;
+  const { count } = customerDatabase.acquired[name];
   const li = createAndSetElement('li', {
     className: 'box item-scroll'
   });
@@ -166,7 +159,7 @@ const getAcquired = beverage => {
   });
   const span = createAndSetElement('span', {
     className: 'value-scroll',
-    text: acquired[name]
+    text: count
   });
   li.appendChild(img);
   li.appendChild(strong);
@@ -236,6 +229,7 @@ const setAcquired = () => {
   const { beverage } = machineDatabase;
   const { acquired, display } = customerDatabase;
   const fragment = document.createDocumentFragment();
+  resetElement(lists.acquired);
   display.forEach(bev => {
     if (acquired[bev].count > 0) {
       const li = getAcquired(beverage[bev]);
@@ -263,7 +257,7 @@ const setValues = () => {
   VIEW.money = money;
 }
 
-// 선택된 음료수 정보를 갱신
+// 선택된 음료 갱신
 const updateSelected = (name, price) => {
   if (!VIEW.display.includes(name)) {
     VIEW.display.push(name);
@@ -274,9 +268,31 @@ const updateSelected = (name, price) => {
   setSelected();
 };
 
+const clearSelected = () => {
+  VIEW.selected = {};
+  VIEW.display = [];
+  setSelected();
+};
+
+// 획득한 음료 갱신
+const updateAcquired = () => {
+  const { beverage } = machineDatabase;
+  const { acquired, display } = customerDatabase;
+  Object.keys(VIEW.selected).forEach(bev => {
+    const { count, price } = VIEW.selected[bev];
+    if (!display.includes(bev)) {
+      display.push(bev);
+      acquired[bev] = new Beverage(bev, 0, price);
+    }
+    acquired[bev].count += count;
+    beverage[bev].count -= count;
+  });
+  setAcquired();
+};
+
 const isCountCorrect = () => {
   const { beverage } = machineDatabase;
-  Object.keys(VIEW.selected).every(bev => {
+  return Object.keys(VIEW.selected).every(bev => {
     return VIEW.selected[bev].count <= beverage[bev].count;
   });
 };
@@ -353,19 +369,10 @@ const eventHandlers = {
 
   acquire() {
     if (isAcquireValid()) {
-      const { beverage } = machineDatabase;
-      const { acquired } = customerDatabase;
-      // 여기다가 자판기 음료의 재고수를 차감하고,
-      VIEW.selected.forEach(bev => {
-        const { count } = VIEW.selected[bev];
-        beverage[bev].count -= count;
-        acquired[bev].count += count;
-      });
-      setAcquired();
-      VIEW.selected = {};
-      VIEW.display = [];
-      setSelected();
-      
+      updateAcquired();
+      clearSelected();
+    } else {
+      alert(VIEW.ALERT_TXT00);
     }
   }
 };
@@ -373,7 +380,7 @@ const eventHandlers = {
 const main = () => {
   setDisplay();
   setSelected();
-  //setAcquired();
+  setAcquired();
   setButtons();
   setValues();
 };
