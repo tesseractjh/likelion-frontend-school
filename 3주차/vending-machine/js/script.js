@@ -44,6 +44,7 @@ const VIEW = {
   viewBalance: 1000,
   viewPay: 0,
   viewMoney: 25000,
+  viewTotal: 9000,
   selected: {},
   display: [],
   get balance() {
@@ -66,6 +67,13 @@ const VIEW = {
   set money(value) {
     this.viewMoney = value;
     values.money.textContent = this.viewMoney;
+  },
+  get total() {
+    return this.viewTotal;
+  },
+  set total(value) {
+    this.viewTotal = value;
+    values.total.textContent = this.viewTotal;
   }
 };
 
