@@ -33,7 +33,7 @@ const customerDatabase = {
   },
 
   get costTotalSum() {
-    return this.display.reduce((sum, bev) => sum + this.costSum(bev), 0);
+    return this.display.reduce((sum, name) => sum + this.costSum(name), 0);
   }
 };
 
@@ -82,7 +82,7 @@ const VIEW = {
   },
 
   get costTotalSum() {
-    return this.display.reduce((sum, bev) => sum + this.costSum(bev), 0);
+    return this.display.reduce((sum, name) => sum + this.costSum(name), 0);
   }
 };
 
@@ -120,8 +120,7 @@ const createAndSetElement = (tagName, setting = {}) => {
 };
 
 // 현재 자판기에서 선택된 음료수에 대해 li 엘리먼트를 생성하여 반환
-const getSelected = beverage => {
-  const { name } = beverage;
+const getSelected = name => {
   const { count } = VIEW.selected[name];
   const li = createAndSetElement('li', {
     className: 'box item-scroll'
@@ -211,8 +210,8 @@ const setItem = (beverage, index) => {
 // 자판기에 음료수 진열
 const setDisplay = () => {
   const { beverage, display } = machineDatabase;
-  display.forEach((bev, index) => {
-    setItem(beverage[bev], index + 1);
+  display.forEach((name, index) => {
+    setItem(beverage[name], index + 1);
   });
 };
 
@@ -224,12 +223,11 @@ const resetElement = element => {
 
 // 선택된 음료수 표시
 const setSelected = () => {
-  const { beverage } = machineDatabase;
   const { display } = VIEW;
   const fragment = document.createDocumentFragment();
   resetElement(lists.selected);
-  display.forEach(bev => {
-    const li = getSelected(beverage[bev]);
+  display.forEach(name => {
+    const li = getSelected(name);
     fragment.appendChild(li);
   });
   lists.selected.appendChild(fragment);
@@ -241,9 +239,9 @@ const setAcquired = () => {
   const { acquired, display } = customerDatabase;
   const fragment = document.createDocumentFragment();
   resetElement(lists.acquired);
-  display.forEach(bev => {
-    if (acquired[bev].count > 0) {
-      const li = getAcquired(beverage[bev]);
+  display.forEach(name => {
+    if (acquired[name].count > 0) {
+      const li = getAcquired(beverage[name]);
       fragment.appendChild(li);
     }
   });
@@ -289,24 +287,24 @@ const clearSelected = () => {
 const updateAcquired = () => {
   const { beverage } = machineDatabase;
   const { acquired, display } = customerDatabase;
-  Object.keys(VIEW.selected).forEach(bev => {
-    const { count, price } = VIEW.selected[bev];
-    if (!display.includes(bev)) {
-      display.push(bev);
-      acquired[bev] = new Beverage(bev, 0, price);
+  Object.keys(VIEW.selected).forEach(name => {
+    const { count, price } = VIEW.selected[name];
+    if (!display.includes(name)) {
+      display.push(name);
+      acquired[name] = new Beverage(name, 0, price);
     }
-    acquired[bev].count += count;
-    beverage[bev].count -= count;
-    VIEW.pay -= VIEW.costSum(bev);
-    customerDatabase.money -= VIEW.costSum(bev);
+    acquired[name].count += count;
+    beverage[name].count -= count;
+    VIEW.pay -= VIEW.costSum(name);
+    customerDatabase.money -= VIEW.costSum(name);
   });
   setAcquired();
 };
 
 const isCountCorrect = () => {
   const { beverage } = machineDatabase;
-  return Object.keys(VIEW.selected).every(bev => {
-    return VIEW.selected[bev].count <= beverage[bev].count;
+  return Object.keys(VIEW.selected).every(name => {
+    return VIEW.selected[name].count <= beverage[name].count;
   });
 };
 
