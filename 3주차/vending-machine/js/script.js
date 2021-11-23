@@ -25,7 +25,16 @@ const machineDatabase = {
 const customerDatabase = {
   money: 25000,
   acquired: {},
-  display: []
+  display: [],
+
+  costSum(beverage) {
+    const { price, count } = this.acquired[beverage];
+    return price * count;
+  },
+
+  get costTotalSum() {
+    return this.display.reduce((sum, bev) => sum + this.costSum(bev), 0);
+  }
 };
 
 // 클라이언트 변수
@@ -67,11 +76,13 @@ const VIEW = {
     values.acquired.textContent = this.viewTotal;
   },
 
-  get costSum() {
-    return this.display.reduce((sum, bev) => {
-      const { price, count } = this.selected[bev];
-      return sum + price * count;
-    }, 0);
+  costSum(beverage) {
+    const { price, count } = this.selected[beverage];
+    return price * count;
+  },
+
+  get costTotalSum() {
+    return this.display.reduce((sum, bev) => sum + this.costSum(bev), 0);
   }
 };
 
@@ -286,6 +297,8 @@ const updateAcquired = () => {
     }
     acquired[bev].count += count;
     beverage[bev].count -= count;
+    VIEW.pay -= VIEW.costSum(bev);
+    customerDatabase.money -= VIEW.costSum(bev);
   });
   setAcquired();
 };
@@ -310,13 +323,13 @@ const isPayValid = value => {
 const isChangeValid = value => {
   if (!value || !Number.isInteger(value) || value < 0) {
     return false;
-  } else if (VIEW.costSum + VIEW.balance !== VIEW.pay) {
+  } else if (VIEW.costTotalSum + VIEW.balance !== VIEW.pay) {
     return false;
   }
   return true;
 };
 
-const isAcquireValid = value => {
+const isAcquireValid = () => {
   const { money } = customerDatabase;
   if (VIEW.pay + VIEW.money !== money) {
     return false;
@@ -371,6 +384,8 @@ const eventHandlers = {
     if (isAcquireValid()) {
       updateAcquired();
       clearSelected();
+      const { costTotalSum } = customerDatabase;
+      VIEW.total = costTotalSum;
     } else {
       alert(VIEW.ALERT_TXT00);
     }
