@@ -42,6 +42,7 @@ const VIEW = {
   ALERT_TXT00: '오류가 발생했습니다.',
   ALERT_TXT01: '입금액을 입력하세요.',
   ALERT_TXT02: '소지금이 부족합니다.',
+  ALERT_TXT03: '유효한 입력이 아닙니다.',
   pay: 0,
   viewBalance: 0,
   viewMoney: 0,
@@ -117,6 +118,13 @@ const createAndSetElement = (tagName, setting = {}) => {
   const element = document.createElement(tagName);
   setElement(element, setting);
   return element;
+};
+
+// 엘리먼트의 모든 자식 엘리먼트 제거
+const resetElement = element => {
+  while (element.firstElementChild) {
+    element.removeChild(element.lastElementChild);
+  }
 };
 
 // 현재 자판기에서 선택된 음료수에 대해 li 엘리먼트를 생성하여 반환
@@ -215,12 +223,6 @@ const setDisplay = () => {
   });
 };
 
-const resetElement = element => {
-  while (element.firstElementChild) {
-    element.removeChild(element.lastElementChild);
-  }
-};
-
 // 선택된 음료수 표시
 const setSelected = () => {
   const { display } = VIEW;
@@ -248,17 +250,30 @@ const setAcquired = () => {
   lists.acquired.appendChild(fragment);
 };
 
+// 에러 처리가 된 이벤트 핸들러 반환
+const getEventHandler = key => {
+  return (event) => {
+    try {
+      eventHandlers[key](event);
+    } catch (error) {
+      console.log('버튼 오류 :', error);
+      alert(VIEW.ALERT_TXT00);
+    }
+  };
+};
+
 // 모든 버튼에 이벤트 리스너 등록
 const setButtons = () => {
   Object.entries(buttons).forEach(([ key, button ]) => {
-    button.addEventListener('click', eventHandlers[key]);
+    button.addEventListener('click', getEventHandler(key));
   });
   document.querySelectorAll('.btn-item').forEach(button => {
-    button.addEventListener('click', eventHandlers.select);
+    button.addEventListener('click', getEventHandler('select'));
   });
 };
 
-const setValues = () => {
+// 모든 금액과 관련된 값들 초기화
+const initValues = () => {
   const { money } = customerDatabase;
   VIEW.pay = 0;
   VIEW.balance = 0;
@@ -277,6 +292,7 @@ const updateSelected = (name, price) => {
   setSelected();
 };
 
+// 선택된 음료 초기화
 const clearSelected = () => {
   VIEW.selected = {};
   VIEW.display = [];
@@ -301,6 +317,7 @@ const updateAcquired = () => {
   setAcquired();
 };
 
+// 획득한 음료의 개수가 machineDatabase에 있는 재고량 이하인지 확인
 const isCountCorrect = () => {
   const { beverage } = machineDatabase;
   return Object.keys(VIEW.selected).every(name => {
@@ -318,6 +335,7 @@ const isPayValid = value => {
   return true;
 };
 
+// change 버튼을 눌렀을 때 잔액의 유효성 검사
 const isChangeValid = value => {
   if (!value || !Number.isInteger(value) || value < 0) {
     return false;
@@ -327,6 +345,7 @@ const isChangeValid = value => {
   return true;
 };
 
+// acquire 버튼을 눌렀을 때 소지금의 유효성 검사
 const isAcquireValid = () => {
   const { money } = customerDatabase;
   if (VIEW.pay + VIEW.money !== money) {
@@ -337,8 +356,8 @@ const isAcquireValid = () => {
   return true;
 };
 
+// 버튼에 들어갈 이벤트 핸들러 모음
 const eventHandlers = {
-
   select({ currentTarget }) {
     const { name, price, count } = currentTarget.dataset;
     if (+count > 0 && VIEW.balance >= price) {
@@ -361,7 +380,7 @@ const eventHandlers = {
     } else if (value > VIEW.money) {
       alert(VIEW.ALERT_TXT02);
     } else  {
-      alert(VIEW.ALERT_TXT00);
+      alert(VIEW.ALERT_TXT03);
     }
     values.pay.value = '';
     values.pay.focus();
@@ -391,11 +410,16 @@ const eventHandlers = {
 };
 
 const main = () => {
-  setDisplay();
-  setSelected();
-  setAcquired();
-  setButtons();
-  setValues();
+  try {
+    setDisplay();
+    setSelected();
+    setAcquired();
+    setButtons();
+    initValues();
+  } catch (error) {
+    console.error('로딩 오류:', error);
+    alert(VIEW.ALERT_TXT00);
+  }
 };
 
 main();
