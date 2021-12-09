@@ -3,6 +3,7 @@ const loginEventHandler = () => {
   const pwValue = $('.input-pw').val().trim();
   if (idValue === '' || pwValue === '') {
     alert('아이디와 비밀번호를 모두 입력해주세요!');
+    clearInput();
     return;
   }
   $.ajax({
@@ -59,8 +60,7 @@ const loginSuccess = ({ id, phone, grade}) => {
 
 const loginFail = () => {
   alert('로그인 실패!');
-  $('.input-id').val('');
-  $('.input-pw').val('');
+  clearInput();
   $('.login-form').html(`
     <p>
       아이디 혹은 비밀번호가
@@ -70,6 +70,11 @@ const loginFail = () => {
   `);
   $('.login-form').addClass('login-text');
   addEventListenerToCreatedButtons();
+};
+
+const clearInput = () => {
+  $('.input-id').val('');
+  $('.input-pw').val('');
 };
 
 $('.login-btn').click(loginEventHandler);
