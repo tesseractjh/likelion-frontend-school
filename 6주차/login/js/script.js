@@ -44,11 +44,11 @@ const addEventListenerToCreatedButtons = () => {
   });
 };
 
-const loginSuccess = ({ id, phone, grade}) => {
+const loginSuccess = ({ name, phone, grade}) => {
   alert('로그인 성공!');
   $('.login-form').html(`
     <p>
-      <span style="font-weight: 700;">${id}</span> 회원님 환영합니다!<br>
+      <span style="font-weight: 700;">${name}</span> 회원님 환영합니다!<br>
       보유중인 멋사코인: <span style="font-weight: 700;">${phone.slice(-4)}</span>코인<br>
       현재 등급: <span style="font-weight: 700;">${grade}</span>
     </p>
