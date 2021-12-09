@@ -45,6 +45,10 @@ input {
   line-height: 40px;
 }
 
+.login-padding {
+  padding: 25px;
+}
+
 .logout-btn {
-  margin-top: 10px;
+  margin-top: 20px;
 }

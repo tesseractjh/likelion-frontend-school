@@ -38,6 +38,7 @@ const addEventListenerToCreatedButtons = () => {
       </div>
       <button type="button" class="btn login-btn">로그인</button>
       `);
+      $('.login').removeClass('login-padding');
       $('.login-form').removeClass('login-text');
       $('.login-btn').click(loginEventHandler);
     });
@@ -54,6 +55,7 @@ const loginSuccess = ({ name, phone, grade}) => {
     </p>
     <button type="button" class="btn logout-btn">로그아웃</button>
   `);
+  $('.login').addClass('login-padding');
   $('.login-form').addClass('login-text');
   addEventListenerToCreatedButtons();
 };
@@ -68,6 +70,7 @@ const loginFail = () => {
     </p>
     <button type="button" class="btn login-btn-re">로그인 재시도</button>
   `);
+  $('.login').removeClass('login-padding');
   $('.login-form').addClass('login-text');
   addEventListenerToCreatedButtons();
 };
