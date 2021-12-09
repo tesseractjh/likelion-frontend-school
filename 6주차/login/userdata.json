@@ -126,5 +126,21 @@
       "phone": "+1 (990) 516-2175",
       "address": "123 Hale Avenue, Eggertsville, North Carolina, 115",
       "grade": "골드"
+  },
+  {
+      "_id": "61b05e53c9deb83252fc7f75",
+      "id": "임준홍",
+      "pw": "짱이다",
+      "index": 8,
+      "picture": "http://placehold.it/32x32",
+      "age": 26,
+      "eyeColor": "black",
+      "name": "임준홍",
+      "gender": "male",
+      "company": "TERASCAPE",
+      "email": "richardsonferguson@terascape.com",
+      "phone": "+1 (990) 516-2175",
+      "address": "123 Hale Avenue, Eggertsville, North Carolina, 115",
+      "grade": "다이아"
   }
 ]
