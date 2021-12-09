@@ -10,13 +10,9 @@ const loginEventHandler = () => {
     url: 'https://raw.githubusercontent.com/tesseractjh/likelion-frontend-school/main/6%EC%A3%BC%EC%B0%A8/login/userdata.json',
     async: true,
     success: data => {
-      const user = JSON.parse(data).find(user => user.id === idValue);
+      const user = JSON.parse(data).find(user => user.id === idValue && user.pw === pwValue);
       if (user) {
-        if (user.pw === pwValue) {
-          loginSuccess(user);
-        } else {
-          loginFail();
-        }
+        loginSuccess(user);
       } else {
         loginFail();
       }
